@@ -12,7 +12,7 @@
 typedef CF_ENUM(NSInteger, SelectionMode) {
     ZBJSelectionModeDisable = 0,    // Can not select
     ZBJSelectionModeSingle,         // Single selection mode
-    ZBJSelectionModeMutiple,        // Mutile selection mode
+    ZBJSelectionModeMutiple,        // Multiple selection mode
 };
 
 typedef CF_ENUM(NSInteger, CalendarViewHeadStyle) {
@@ -112,7 +112,7 @@ typedef CF_ENUM(NSInteger, CalendarViewHeadStyle) {
 @property (nonatomic, assign) CGFloat cellScale;
 
 /**
- *  Registe a class for calendar day cell.
+ *  Register a class for calendar day cell.
  *
  *  @param clazz      Calendar day cell, it should be a subclass of `UICollectionViewCell`
  *  @param identifier The cell's reuse identifier.
@@ -120,7 +120,7 @@ typedef CF_ENUM(NSInteger, CalendarViewHeadStyle) {
 - (void)registerCellClass:(id)clazz withReuseIdentifier:(NSString *)identifier;
 
 /**
- *  This two methods used to registe a class for calendar section header or footer view.
+ *  This two methods used to register a class for calendar section header or footer view.
  *
  *  @param clazz      Calendar section header or footer view, it should be a subclass of `UICollectionReusableView`
  *  @param identifier The view's reuse identifier.

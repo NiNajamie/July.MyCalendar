@@ -22,7 +22,7 @@
 
 @implementation CalendarView
 
-#pragma  mark - Override
+#pragma mark - Override
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {

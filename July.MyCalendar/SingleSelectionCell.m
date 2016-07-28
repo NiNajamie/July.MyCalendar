@@ -12,6 +12,8 @@
 @interface SingleSelectionCell()
 
 @property (nonatomic, strong) UILabel *dateLabel;
+@property (nonatomic, strong) UILabel *indicator;
+
 @property (nonatomic, strong) NSCalendar *calendar;
 
 @property (nonatomic, strong) CALayer *topLine;
@@ -25,6 +27,8 @@
     if (self = [super initWithFrame:frame]) {
         [self.contentView addSubview:self.dateLabel];
         [self.contentView.layer addSublayer:self.topLine];
+        [self.contentView addSubview:self.indicator];
+
         self.calendar = [NSDate gregorianCalendar];
     }
     return self;
@@ -34,6 +38,8 @@
     [super layoutSubviews];
     self.topLine.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), 0.5);
     self.dateLabel.center = CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.frame) / 2 - 13);
+    self.indicator.center = CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.frame) / 2 + 5);
+
 }
 
 
@@ -41,13 +47,18 @@
     _date = date;
     if (_date) {
         self.dateLabel.text = [NSString stringWithFormat:@"%ld", [self.calendar component:NSCalendarUnitDay fromDate:_date]];
+        self.indicator.text = @"+";
     } else {
         self.dateLabel.text = nil;
+        self.indicator.text = nil;
+
     }
 }
 
 - (void)setCellState:(CalendarCellState)cellState {
     _cellState = cellState;
+    self.indicator.backgroundColor = [UIColor clearColor];
+
     switch (_cellState) {
         case ZBJCalendarCellStateEmpty: {
             self.dateLabel.text = nil;
@@ -98,11 +109,21 @@
     if (!_dateLabel) {
         _dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 34, 34)];
         _dateLabel.textAlignment = NSTextAlignmentCenter;
-        _dateLabel.font = [UIFont systemFontOfSize:17];
+        _dateLabel.font = [UIFont systemFontOfSize:15];
         _dateLabel.textColor = [UIColor darkTextColor];
         _dateLabel.clipsToBounds = YES;
     }
     return _dateLabel;
+}
+- (UILabel *)indicator {
+    if (!_indicator) {
+        _indicator = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 34, 34)];
+        _indicator.textAlignment = NSTextAlignmentCenter;
+        _indicator.font = [UIFont systemFontOfSize:20];
+        _indicator.textColor = [UIColor orangeColor];
+        _indicator.clipsToBounds = YES;
+    }
+    return _indicator;
 }
 
 - (CALayer *)topLine {
